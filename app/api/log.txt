@@ -1,0 +1,64 @@
+curl -X POST http://localhost:3000/api/v1/auth/register \
+    -H "Content-Type: application/json" \
+    -d '{"email":"buyer@test.com","name":"Mohit","password":"password123","role":"BUYER"}'
+{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ4NjU5LCJleHAiOjE3NzQ1NTM0NTl9.kKCmgSj4edu65vQLJs-01q4qEbfwF-15Cp91K3M6E6k","user":{"id":"9e2a6237-0e73-421a-9359-7ec64a883d53","email":"buyer@test.com","name":"Mohit","role":"BUYER"}}}
+
+curl -X POST http://localhost:3000/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"supplier@test.com","name":"Vishakha","password":"password123","role":"SUPPLIER","companyName":"Sharma Enterprises"}'
+{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOWNjODU3My1lZjI5LTRhODktYTg5ZS01MzlkNWE0MTNjNDUiLCJlbWFpbCI6InN1cHBsaWVyQHRlc3QuY29tIiwicm9sZSI6IlNVUFBMSUVSIiwic3VwcGxpZXJJZCI6ImQ1Njg4YmE5LTU0ODEtNDM0YS05NGZiLWE4M2FiYzFkMWNlNSIsImlhdCI6MTc3Mzk0ODcxNiwiZXhwIjoxNzc0NTUzNTE2fQ.r4hinxq0QHtcGj3tLb6G-lts9QMrPfT2IKCCSLO1Fl4","user":{"id":"a9cc8573-ef29-4a89-a89e-539d5a413c45","email":"supplier@test.com","name":"Vishakha","role":"SUPPLIER","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5"}}}
+
+curl -X POST http://localhost:3000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"buyer@test.com","password":"password123"}'
+{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk","user":{"id":"9e2a6237-0e73-421a-9359-7ec64a883d53","email":"buyer@test.com","name":"Mohit","role":"BUYER"}}}
+
+
+curl -X POST http://localhost:3000/api/v1/products \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"name":"Steel Pipes 1 inch","description":"GI steel pipes, 6m length","unit":"piece","category":"Construction"}'
+
+curl -X POST http://localhost:3000/api/v1/products \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"name":"Rajasthan Marble Slab","description":"White Makrana marble, 18mm thick","unit":"sqft","category":"Stone"}'
+
+                                                                                                                         
+curl -X POST http://localhost:3000/api/v1/products \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"name":"Black Galaxy Granite","description":"Premium black granite with gold specks","unit":"sqft","category":"Stone"}'
+                                                                                                                         
+curl -X POST http://localhost:3000/api/v1/products \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"name":"Kota Stone","description":"Natural Kota limestone, 20mm thick","unit":"sqft","category":"Stone"}'
+
+{"success":true,"data":{"id":"ca6e69ea-a980-4591-82fe-2aea9d1135ce","name":"Steel Pipes 1 inch","description":"GI steel pipes, 6m length","unit":"piece","category":"Construction","createdAt":"2026-03-19T19:39:32.217Z"}}
+{"success":true,"data":{"id":"8e67b7a9-3db1-4cfd-82d0-5f6e3a297879","name":"Rajasthan Marble Slab","description":"White Makrana marble, 18mm thick","unit":"sqft","category":"Stone","createdAt":"2026-03-19T19:39:33.005Z"}}
+{"success":true,"data":{"id":"c79cf4c3-fed4-4a88-9034-c56c316f2402","name":"Black Galaxy Granite","description":"Premium black granite with gold specks","unit":"sqft","category":"Stone","createdAt":"2026-03-19T19:39:33.434Z"}}
+{"success":true,"data":{"id":"444c21dc-6ebe-41c4-92c7-f46c3a6d3176","name":"Kota Stone","description":"Natural Kota limestone, 20mm thick","unit":"sqft","category":"Stone","createdAt":"2026-03-19T19:39:33.890Z"}}
+
+
+ curl -X POST http://localhost:3000/api/v1/rfq \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"productId":"c79cf4c3-fed4-4a88-9034-c56c316f2402","quantity":500,"description":"Grade A quality"}'
+{"success":true,"data":{"id":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","buyerId":"9e2a6237-0e73-421a-9359-7ec64a883d53","productId":"c79cf4c3-fed4-4a88-9034-c56c316f2402","quantity":500,"description":"Grade A quality","deadline":null,"status":"OPEN","createdAt":"2026-03-19T19:57:42.791Z","updatedAt":"2026-03-19T19:57:42.791Z","buyer":{"id":"9e2a6237-0e73-421a-9359-7ec64a883d53","name":"Mohit","email":"buyer@test.com"},"product":{"id":"c79cf4c3-fed4-4a88-9034-c56c316f2402","name":"Black Galaxy Granite","unit":"sqft","category":"Stone"},"_count":{"quotes":0}}}
+
+curl -X POST http://localhost:3000/api/v1/rfq/9fa76d95-8e5b-41b0-90c0-e0f2121a5bed/quote \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOWNjODU3My1lZjI5LTRhODktYTg5ZS01MzlkNWE0MTNjNDUiLCJlbWFpbCI6InN1cHBsaWVyQHRlc3QuY29tIiwicm9sZSI6IlNVUFBMSUVSIiwic3VwcGxpZXJJZCI6ImQ1Njg4YmE5LTU0ODEtNDM0YS05NGZiLWE4M2FiYzFkMWNlNSIsImlhdCI6MTc3Mzk0ODcxNiwiZXhwIjoxNzc0NTUzNTE2fQ.r4hinxq0QHtcGj3tLb6G-lts9QMrPfT2IKCCSLO1Fl4" \
+  -d '{"pricePerUnit":250,"deliveryDays":7,"notes":"Includes delivery"}'
+{"success":true,"data":{"id":"9f9bf675-bc66-4152-bbe4-40e976f8395c","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","pricePerUnit":250,"totalPrice":125000,"deliveryDays":7,"notes":"Includes delivery","status":"PENDING","createdAt":"2026-03-19T20:00:25.468Z","updatedAt":"2026-03-19T20:00:25.468Z","supplier":{"id":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","userId":"a9cc8573-ef29-4a89-a89e-539d5a413c45","companyName":"Sharma Enterprises","verified":false,"createdAt":"2026-03-19T19:31:56.218Z","user":{"name":"Vishakha","email":"supplier@test.com"}}}}
+
+curl http://localhost:3000/api/v1/rfq/9fa76d95-8e5b-41b0-90c0-e0f2121a5bed/quotes \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk"
+{"success":true,"data":[{"id":"9f9bf675-bc66-4152-bbe4-40e976f8395c","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","pricePerUnit":250,"totalPrice":125000,"deliveryDays":7,"notes":"Includes delivery","status":"PENDING","createdAt":"2026-03-19T20:00:25.468Z","updatedAt":"2026-03-19T20:00:25.468Z","supplier":{"id":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","userId":"a9cc8573-ef29-4a89-a89e-539d5a413c45","companyName":"Sharma Enterprises","verified":false,"createdAt":"2026-03-19T19:31:56.218Z","user":{"name":"Vishakha","email":"supplier@test.com"}}}]}
+
+curl -X POST http://localhost:3000/api/v1/rfq/9fa76d95-8e5b-41b0-90c0-e0f2121a5bed/accept \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
+  -d '{"quoteId":"9f9bf675-bc66-4152-bbe4-40e976f8395c"}'
+{"success":true,"data":{"id":"23fc0469-a0cb-4087-b9de-f183366d5bf7","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","quoteId":"9f9bf675-bc66-4152-bbe4-40e976f8395c","buyerId":"9e2a6237-0e73-421a-9359-7ec64a883d53","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","totalPrice":125000,"status":"CONFIRMED","createdAt":"2026-03-19T20:02:41.203Z","updatedAt":"2026-03-19T20:02:41.203Z","rfq":{"id":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","buyerId":"9e2a6237-0e73-421a-9359-7ec64a883d53","productId":"c79cf4c3-fed4-4a88-9034-c56c316f2402","quantity":500,"description":"Grade A quality","deadline":null,"status":"OPEN","createdAt":"2026-03-19T19:57:42.791Z","updatedAt":"2026-03-19T19:57:42.791Z","product":{"id":"c79cf4c3-fed4-4a88-9034-c56c316f2402","name":"Black Galaxy Granite","description":"Premium black granite with gold specks","unit":"sqft","category":"Stone","createdAt":"2026-03-19T19:39:33.434Z"}},"quote":{"id":"9f9bf675-bc66-4152-bbe4-40e976f8395c","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","pricePerUnit":250,"totalPrice":125000,"deliveryDays":7,"notes":"Includes delivery","status":"PENDING","createdAt":"2026-03-19T20:00:25.468Z","updatedAt":"2026-03-19T20:00:25.468Z"},"buyer":{"name":"Mohit","email":"buyer@test.com"}}}
