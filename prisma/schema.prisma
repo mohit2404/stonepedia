@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
   output   = "../app/generated/prisma"
@@ -12,9 +7,131 @@ datasource db {
   provider = "postgresql"
 }
 
+// Enums
+
+enum Role {
+  BUYER
+  SUPPLIER
+}
+
+enum RFQStatus {
+  OPEN
+  CLOSED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum OrderStatus {
+  CONFIRMED
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+// Models
+
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
-  createdAt DateTime @default(now())
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String   @map("password_hash")
+  role         Role
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  supplier Supplier?
+  rfqs     RFQ[]     @relation("BuyerRFQs")
+  orders   Order[]   @relation("BuyerOrders")
+
+  @@map("users")
+}
+
+model Supplier {
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id")
+  companyName String   @map("company_name")
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quotes Quote[]
+  orders Order[] @relation("SupplierOrders")
+
+  @@map("suppliers")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  unit        String   @default("unit")
+  category    String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  rfqs RFQ[]
+
+  @@map("products")
+}
+
+model RFQ {
+  id          String    @id @default(uuid())
+  buyerId     String    @map("buyer_id")
+  productId   String    @map("product_id")
+  quantity    Int
+  description String?
+  deadline    DateTime?
+  status      RFQStatus @default(OPEN)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  buyer   User    @relation("BuyerRFQs", fields: [buyerId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  quotes  Quote[]
+  order   Order?
+
+  @@map("rfqs")
+}
+
+model Quote {
+  id           String      @id @default(uuid())
+  rfqId        String      @map("rfq_id")
+  supplierId   String      @map("supplier_id")
+  pricePerUnit Float       @map("price_per_unit")
+  totalPrice   Float       @map("total_price")
+  deliveryDays Int?        @map("delivery_days")
+  notes        String?
+  status       QuoteStatus @default(PENDING)
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+
+  rfq      RFQ      @relation(fields: [rfqId], references: [id])
+  supplier Supplier @relation(fields: [supplierId], references: [id])
+  order    Order?
+
+  @@unique([rfqId, supplierId])
+  @@map("quotes")
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  rfqId      String      @unique @map("rfq_id")
+  quoteId    String      @unique @map("quote_id")
+  buyerId    String      @map("buyer_id")
+  supplierId String      @map("supplier_id")
+  totalPrice Float       @map("total_price")
+  status     OrderStatus @default(CONFIRMED)
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  rfq      RFQ      @relation(fields: [rfqId], references: [id])
+  quote    Quote    @relation(fields: [quoteId], references: [id])
+  buyer    User     @relation("BuyerOrders", fields: [buyerId], references: [id])
+  supplier Supplier @relation("SupplierOrders", fields: [supplierId], references: [id])
+
+  @@map("orders")
 }
