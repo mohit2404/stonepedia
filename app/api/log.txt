@@ -8,10 +8,16 @@ curl -X POST http://localhost:3000/api/v1/auth/register \
   -d '{"email":"supplier@test.com","name":"Vishakha","password":"password123","role":"SUPPLIER","companyName":"Sharma Enterprises"}'
 {"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOWNjODU3My1lZjI5LTRhODktYTg5ZS01MzlkNWE0MTNjNDUiLCJlbWFpbCI6InN1cHBsaWVyQHRlc3QuY29tIiwicm9sZSI6IlNVUFBMSUVSIiwic3VwcGxpZXJJZCI6ImQ1Njg4YmE5LTU0ODEtNDM0YS05NGZiLWE4M2FiYzFkMWNlNSIsImlhdCI6MTc3Mzk0ODcxNiwiZXhwIjoxNzc0NTUzNTE2fQ.r4hinxq0QHtcGj3tLb6G-lts9QMrPfT2IKCCSLO1Fl4","user":{"id":"a9cc8573-ef29-4a89-a89e-539d5a413c45","email":"supplier@test.com","name":"Vishakha","role":"SUPPLIER","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5"}}}
 
-curl -X POST http://localhost:3000/api/v1/auth/login \
+curl -X POST http://localhost:3000/api/v1/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"email":"buyer@test.com","password":"password123"}'
-{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk","user":{"id":"9e2a6237-0e73-421a-9359-7ec64a883d53","email":"buyer@test.com","name":"Mohit","role":"BUYER"}}}
+  -d '{"email":"supplier2@test.com","name":"Rajesh Verma","password":"password123","role":"SUPPLIER","companyName":"Verma Stone Works"}'
+{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDY1MGQyMy05NzhjLTQwNTItYTRkZi0zMDEwMDgwNjdiYWEiLCJlbWFpbCI6InN1cHBsaWVyMkB0ZXN0LmNvbSIsInJvbGUiOiJTVVBQTElFUiIsInN1cHBsaWVySWQiOiI2ZmE1ZjZmZS1hZDAzLTRjZTYtYTVmNi00YTNhMDIyOGEyNDYiLCJpYXQiOjE3NzM5NTQwODYsImV4cCI6MTc3NDU1ODg4Nn0.Kn6TJUL6__9H02TgmEn_G7m_vOIq3-aTy2Xcl4Xlm3U","user":{"id":"10650d23-978c-4052-a4df-301008067baa","email":"supplier2@test.com","name":"Rajesh Verma","role":"SUPPLIER","supplierId":"6fa5f6fe-ad03-4ce6-a5f6-4a3a0228a246"}}}
+
+
+curl -X POST http://localhost:3000/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"supplier3@test.com","name":"Priya Singh","password":"password123","role":"SUPPLIER","companyName":"Singh Marble Co"}'  
+{"success":true,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZGFjNjc2Yi1hYWE0LTQ2NjEtYTBjZi1mOGFiZjBkZmIyNmEiLCJlbWFpbCI6InN1cHBsaWVyM0B0ZXN0LmNvbSIsInJvbGUiOiJTVVBQTElFUiIsInN1cHBsaWVySWQiOiI1NmNkMmNjNi01ZDUyLTQyNDMtYjFhOC1jY2VlNmMxZWM5NzMiLCJpYXQiOjE3NzM5NTQwODcsImV4cCI6MTc3NDU1ODg4N30.EdWk5btwq1W6lKVDUe90nycn-7QD4aHN6qZ7TtWhQak","user":{"id":"6dac676b-aaa4-4661-a0cf-f8abf0dfb26a","email":"supplier3@test.com","name":"Priya Singh","role":"SUPPLIER","supplierId":"56cd2cc6-5d52-4243-b1a8-ccee6c1ec973"}}}
 
 
 curl -X POST http://localhost:3000/api/v1/products \
@@ -62,3 +68,28 @@ curl -X POST http://localhost:3000/api/v1/rfq/9fa76d95-8e5b-41b0-90c0-e0f2121a5b
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTJhNjIzNy0wZTczLTQyMWEtOTM1OS03ZWM2NGE4ODNkNTMiLCJlbWFpbCI6ImJ1eWVyQHRlc3QuY29tIiwicm9sZSI6IkJVWUVSIiwiaWF0IjoxNzczOTQ5MDU4LCJleHAiOjE3NzQ1NTM4NTh9.Z0tfQ_GFCwyb68VAhQT9cEZPGm4Mx95x_kNMF7uK4gk" \
   -d '{"quoteId":"9f9bf675-bc66-4152-bbe4-40e976f8395c"}'
 {"success":true,"data":{"id":"23fc0469-a0cb-4087-b9de-f183366d5bf7","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","quoteId":"9f9bf675-bc66-4152-bbe4-40e976f8395c","buyerId":"9e2a6237-0e73-421a-9359-7ec64a883d53","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","totalPrice":125000,"status":"CONFIRMED","createdAt":"2026-03-19T20:02:41.203Z","updatedAt":"2026-03-19T20:02:41.203Z","rfq":{"id":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","buyerId":"9e2a6237-0e73-421a-9359-7ec64a883d53","productId":"c79cf4c3-fed4-4a88-9034-c56c316f2402","quantity":500,"description":"Grade A quality","deadline":null,"status":"OPEN","createdAt":"2026-03-19T19:57:42.791Z","updatedAt":"2026-03-19T19:57:42.791Z","product":{"id":"c79cf4c3-fed4-4a88-9034-c56c316f2402","name":"Black Galaxy Granite","description":"Premium black granite with gold specks","unit":"sqft","category":"Stone","createdAt":"2026-03-19T19:39:33.434Z"}},"quote":{"id":"9f9bf675-bc66-4152-bbe4-40e976f8395c","rfqId":"9fa76d95-8e5b-41b0-90c0-e0f2121a5bed","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","pricePerUnit":250,"totalPrice":125000,"deliveryDays":7,"notes":"Includes delivery","status":"PENDING","createdAt":"2026-03-19T20:00:25.468Z","updatedAt":"2026-03-19T20:00:25.468Z"},"buyer":{"name":"Mohit","email":"buyer@test.com"}}}
+
+
+
+# Supplier 1 (Vishakha)
+curl -X POST http://localhost:3000/api/v1/rfq/7dd29684-f39b-4ac1-aec8-73b9388112a5/quote \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOWNjODU3My1lZjI5LTRhODktYTg5ZS01MzlkNWE0MTNjNDUiLCJlbWFpbCI6InN1cHBsaWVyQHRlc3QuY29tIiwicm9sZSI6IlNVUFBMSUVSIiwic3VwcGxpZXJJZCI6ImQ1Njg4YmE5LTU0ODEtNDM0YS05NGZiLWE4M2FiYzFkMWNlNSIsImlhdCI6MTc3Mzk0ODcxNiwiZXhwIjoxNzc0NTUzNTE2fQ.r4hinxq0QHtcGj3tLb6G-lts9QMrPfT2IKCCSLO1Fl4" \
+  -d '{"pricePerUnit":250,"deliveryDays":7,"notes":"Includes cutting and polishing"}'
+{"success":true,"data":{"id":"22335cac-ebe0-4dd7-8faf-a96ca48f5525","rfqId":"7dd29684-f39b-4ac1-aec8-73b9388112a5","supplierId":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","pricePerUnit":250,"totalPrice":250000,"deliveryDays":7,"notes":"Includes cutting and polishing","status":"PENDING","createdAt":"2026-03-19T21:11:08.654Z","updatedAt":"2026-03-19T21:11:08.654Z","supplier":{"id":"d5688ba9-5481-434a-94fb-a83abc1d1ce5","userId":"a9cc8573-ef29-4a89-a89e-539d5a413c45","companyName":"Sharma Enterprises","verified":false,"createdAt":"2026-03-19T19:31:56.218Z","user":{"name":"Vishakha","email":"supplier@test.com"}}}}
+
+
+# Supplier 2 (Rajesh)
+curl -X POST http://localhost:3000/api/v1/rfq/7dd29684-f39b-4ac1-aec8-73b9388112a5/quote \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMDY1MGQyMy05NzhjLTQwNTItYTRkZi0zMDEwMDgwNjdiYWEiLCJlbWFpbCI6InN1cHBsaWVyMkB0ZXN0LmNvbSIsInJvbGUiOiJTVVBQTElFUiIsInN1cHBsaWVySWQiOiI2ZmE1ZjZmZS1hZDAzLTRjZTYtYTVmNi00YTNhMDIyOGEyNDYiLCJpYXQiOjE3NzM5NTQwODYsImV4cCI6MTc3NDU1ODg4Nn0.Kn6TJUL6__9H02TgmEn_G7m_vOIq3-aTy2Xcl4Xlm3U" \
+  -d '{"pricePerUnit":210,"deliveryDays":10,"notes":"Bulk discount applied"}'
+{"success":true,"data":{"id":"d5bf0925-3f51-4fb7-9d80-54dfcb009c95","rfqId":"7dd29684-f39b-4ac1-aec8-73b9388112a5","supplierId":"6fa5f6fe-ad03-4ce6-a5f6-4a3a0228a246","pricePerUnit":210,"totalPrice":210000,"deliveryDays":10,"notes":"Bulk discount applied","status":"PENDING","createdAt":"2026-03-19T21:11:10.089Z","updatedAt":"2026-03-19T21:11:10.089Z","supplier":{"id":"6fa5f6fe-ad03-4ce6-a5f6-4a3a0228a246","userId":"10650d23-978c-4052-a4df-301008067baa","companyName":"Verma Stone Works","verified":false,"createdAt":"2026-03-19T21:01:25.308Z","user":{"name":"Rajesh Verma","email":"supplier2@test.com"}}}}
+
+
+# Supplier 3 (Priya)
+curl -X POST http://localhost:3000/api/v1/rfq/7dd29684-f39b-4ac1-aec8-73b9388112a5/quote \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZGFjNjc2Yi1hYWE0LTQ2NjEtYTBjZi1mOGFiZjBkZmIyNmEiLCJlbWFpbCI6InN1cHBsaWVyM0B0ZXN0LmNvbSIsInJvbGUiOiJTVVBQTElFUiIsInN1cHBsaWVySWQiOiI1NmNkMmNjNi01ZDUyLTQyNDMtYjFhOC1jY2VlNmMxZWM5NzMiLCJpYXQiOjE3NzM5NTQwODcsImV4cCI6MTc3NDU1ODg4N30.EdWk5btwq1W6lKVDUe90nycn-7QD4aHN6qZ7TtWhQak" \
+  -d '{"pricePerUnit":230,"deliveryDays":5,"notes":"Fastest delivery, premium grade"}'
+{"success":true,"data":{"id":"d2d249dc-d096-4118-b2bf-3321dc6c04d1","rfqId":"7dd29684-f39b-4ac1-aec8-73b9388112a5","supplierId":"56cd2cc6-5d52-4243-b1a8-ccee6c1ec973","pricePerUnit":230,"totalPrice":230000,"deliveryDays":5,"notes":"Fastest delivery, premium grade","status":"PENDING","createdAt":"2026-03-19T21:11:11.505Z","updatedAt":"2026-03-19T21:11:11.505Z","supplier":{"id":"56cd2cc6-5d52-4243-b1a8-ccee6c1ec973","userId":"6dac676b-aaa4-4661-a0cf-f8abf0dfb26a","companyName":"Singh Marble Co","verified":false,"createdAt":"2026-03-19T21:01:26.672Z","user":{"name":"Priya Singh","email":"supplier3@test.com"}}}}
