@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 import { prisma } from "@/lib/database/prisma";
 import { signToken } from "@/lib/utils/middleware";
+import { rateLimit } from "@/lib/utils/rateLimit";
 
 const LoginSchema = z.object({
   email: z.email(),
@@ -11,6 +12,10 @@ const LoginSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limit check
+    const { success, error } = rateLimit(req);
+    if (!success) return error;
+
     const body = await req.json();
     const parsed = LoginSchema.safeParse(body);
 

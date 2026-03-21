@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 import { prisma } from "@/lib/database/prisma";
 import { signToken } from "@/lib/utils/middleware";
+import { rateLimit } from "@/lib/utils/rateLimit";
 
 const RegisterSchema = z.object({
   email: z.email("Invalid email"),
@@ -14,6 +15,10 @@ const RegisterSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limit check
+    const { success, error } = rateLimit(req);
+    if (!success) return error;
+
     const body = await req.json();
     const parsed = RegisterSchema.safeParse(body);
 
